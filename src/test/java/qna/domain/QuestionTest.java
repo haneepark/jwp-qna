@@ -45,12 +45,12 @@ public class QuestionTest {
     void save_withAnswersCascade() {
         final User user = users.save(UserTest.JAVAJIGI);
         final Question question = Q1.writeBy(user);
-        question.addAnswer(AnswerTest.A1);
+        final Answer answer = new Answer(user, question, "Answers Contents1");
+        question.addAnswer(answer);
         final Question savedQuestion = questions.save(question);
 
         assertThat(savedQuestion.getAnswers()).hasSize(1);
-        assertThat(savedQuestion.getAnswers()).contains(AnswerTest.A1);
-
+        assertThat(savedQuestion.getAnswers()).contains(answer);
     }
 
     @Test
